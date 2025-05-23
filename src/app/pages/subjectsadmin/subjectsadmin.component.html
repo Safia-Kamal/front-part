@@ -1,0 +1,102 @@
+<nav class="navbar navbar-light bg-white shadow-sm rounded mb-4 px-3">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h5 text-primary">Manage Subjects</span>
+    <span class="text-muted">Administrator</span>
+  </div>
+</nav>
+<div class="container bg-white rounded shadow-sm p-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3 class="fw-bold text-dark">Subjects</h3>
+  <button class="btn btn-primary rounded-pill px-4 py-2" (click)="openAddModal()">
+    Add Subject
+  </button>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-borderless align-middle">
+    <thead class="text-muted">
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sub of subjects">
+        <td>{{ sub.id }}</td>
+        <td>{{ sub.name }}</td>
+        <td>
+          <button class="btn btn-sm text-primary" title="View">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-sm text-warning" title="Edit" (click)="openEditModal(sub)">
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+          <button class="btn btn-sm text-danger" (click)="confirmDelete(sub.id)" title="Delete">
+            <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+  <nav>
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1"><i class="bi bi-chevron-left"></i></a>
+      </li>
+      <li class="page-item active">
+        <a class="page-link bg-primary border-0 rounded-circle text-white" href="#">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Modal for Add/Edit -->
+<div class="modal fade" id="subjectModal" tabindex="-1" aria-labelledby="subjectModalLabel" aria-hidden="true" #subjectModal>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow-sm">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold text-primary" id="subjectModalLabel">
+          {{ isEditMode ? 'Edit Subject' : 'Add New Subject' }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Subject Name</label>
+            <input type="text" class="form-control" [(ngModel)]="sub.name" name="name" 
+                   placeholder="Enter subject name" required>
+          </div>
+        </form>
+      </div>
+
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancel</button>
+        <button *ngIf="!isEditMode" type="button" (click)="addSubject()" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Save</span>
+          <span *ngIf="isLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Saving...
+          </span>
+        </button>
+        <button *ngIf="isEditMode" type="button" (click)="updateSubject()" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Update</span>
+          <span *ngIf="isLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Updating...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

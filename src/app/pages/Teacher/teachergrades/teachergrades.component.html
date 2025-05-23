@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="mb-3" style="max-width: 300px;">
+    <label>Subjects</label>
+    <select class="form-select" [(ngModel)]="selectedSubject" (change)="onSubjectChange()">
+      <option disabled selected value="">Select subject</option>
+      <option *ngFor="let subject of classes" [value]="subject.subjectName">{{ subject.subjectName }}</option>
+    </select>
+  </div>
+
+  <table class="table table-bordered mt-4" *ngIf="students.length > 0">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Current Grade</th>
+        <th>New Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.studentName }}</td>
+        <td>
+          <span *ngIf="student.currentGrade !== null; else noGrade">{{ student.currentGrade }}</span>
+          <ng-template #noGrade><i class="text-muted">No grade</i></ng-template>
+        </td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="student.grade" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-success mt-3" *ngIf="students.length > 0" (click)="saveAllGrades()">Save Grades</button>
+</div>
+
+
+
+

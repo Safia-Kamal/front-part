@@ -1,0 +1,59 @@
+<div class="container bg-light rounded shadow-sm Ml-2 mt-3" style="max-width: 1250px;" > 
+    <!-- p-4 mt-4   "-->
+  <h3 class="text-primary text-center mb-4">My Teaching Schedule</h3>
+
+  <table class="table table-bordered text-center align-middle bg-white rounded">
+    <thead class="table-primary">
+      <tr>
+        <th>Day</th>
+        <th>08:00 AM - 10:00 AM</th>
+        <th>10:00 AM - 12:00 PM</th>
+        <th>12:00 PM - 02:00 PM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let day of ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday']">
+        <tr>
+          <td class="fw-bold text-capitalize">{{ day }}</td>
+          
+          <td>
+            <ng-container *ngIf="groupedSchedule[day]">
+              <ng-container *ngFor="let slot of groupedSchedule[day]">
+                <div *ngIf="slot.startTime.startsWith('08:00')">
+                  <strong>{{ slot.subjectName }}</strong><br>
+                  <small class="text-muted">Class: {{ slot.className }}</small>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+
+          <td>
+            <ng-container *ngIf="groupedSchedule[day]">
+              <ng-container *ngFor="let slot of groupedSchedule[day]">
+                <div *ngIf="slot.startTime.startsWith('10:00')">
+                  <strong>{{ slot.subjectName }}</strong><br>
+                  <small class="text-muted">Class: {{ slot.className }}</small>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+
+          <td>
+            <ng-container *ngIf="groupedSchedule[day]">
+              <ng-container *ngFor="let slot of groupedSchedule[day]">
+                <div *ngIf="slot.startTime.startsWith('12:00')">
+                  <strong>{{ slot.subjectName }}</strong><br>
+                  <small class="text-muted">Class: {{ slot.className }}</small>
+                </div>
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+<!-- 
+  <div *ngIf="Object.keys(groupedSchedule).length === 0" class="text-muted text-center mt-4">
+    No schedule found for you yet.
+  </div> -->
+</div>

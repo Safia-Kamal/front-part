@@ -1,0 +1,55 @@
+<!-- <div class="progress-wrapper">
+  <div class="container progress-container bg-white rounded shadow-sm p-4">
+    <h3 class="text-primary mb-4 text-center">My Progress</h3>
+
+    <table class="table table-bordered table-hover table-striped text-center">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Subject</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grade of stdGrades; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ grade.subjectName }}</td>
+          <td><span [ngClass]="{ 'text-success': grade.value >= 60, 'text-danger': grade.value < 60 }">{{ grade.value }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="stdGrades.length === 0" class="text-muted text-center mt-4">
+      No grades found for you yet 
+    </div>
+  </div>
+</div> -->
+
+
+
+
+ <div class="container bg-white rounded shadow-sm p-4">
+  <h3 class="text-primary mb-4">My Progress</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Subject</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let grade of stdGrades; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ grade.subjectName }}</td>
+        <td>{{ grade.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="stdGrades.length === 0" class="text-muted text-center mt-4">
+    No grades found for you yet.
+  </div>
+</div>
+

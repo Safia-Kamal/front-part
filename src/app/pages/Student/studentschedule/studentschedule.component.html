@@ -1,0 +1,32 @@
+<div class="container bg-white rounded shadow-sm p-4">
+  <h3 class="text-primary mb-4 text-center">Weekly Class Schedule</h3>
+
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Day</th>
+        <th *ngFor="let i of [1,2,3]">Period {{ i }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let day of getDays()">
+        <td class="fw-bold text-capitalize">{{ day }}</td>
+        <ng-container *ngFor="let i of [0,1,2,3,4,5]">
+          <td *ngIf="groupedSchedule[day][i]; else empty">
+            <div>
+              <strong>{{ groupedSchedule[day][i].subjectName }}</strong><br>
+              <small>{{ groupedSchedule[day][i].teacherName }}</small><br>
+              <span class="text-muted" style="font-size: 12px;">
+                {{ groupedSchedule[day][i].startTime }} - {{ groupedSchedule[day][i].endTime }}
+              </span>
+            </div>
+          </td>
+          <ng-template #empty>
+            <td>—</td>
+          </ng-template>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

@@ -1,0 +1,160 @@
+<nav class="navbar navbar-light bg-white shadow-sm rounded mb-4 px-3">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h5 text-primary">Manage Timetables</span>
+    <span class="text-muted">Administrator</span>
+  </div>
+</nav>
+
+<div class="container bg-white rounded shadow-sm p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">Timetables</h3>
+    <button class="btn btn-primary rounded-pill px-4 py-2" (click)="openAddModal()">
+      Add Timetable
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-borderless align-middle">
+      <thead class="text-muted">
+        <tr>
+          <th>ID</th>
+          <th>Class</th>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Day</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tt of timetables">
+          <td>{{ tt.id }}</td>
+          <td>{{ tt.className }}</td>
+          <td>{{ tt.subjectName }}</td>
+          <td>{{ tt.teacherName }}</td>
+          <td>{{ tt.dayOfWeek }}</td>
+          <td>{{ tt.startTime }}</td>
+          <td>{{ tt.endTime }}</td>
+          <td>
+            <button class="btn btn-sm text-primary" title="View">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="btn btn-sm text-warning" title="Edit" (click)="openEditModal(tt)">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn btn-sm text-danger" (click)="confirmDelete(tt.id)" title="Delete">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="timetableModal" tabindex="-1" aria-labelledby="timetableModalLabel" aria-hidden="true" #timetableModal>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-4 shadow-sm">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold text-primary" id="timetableModalLabel">
+            {{ isEditMode ? 'Edit Timetable' : 'Add New Timetable' }}
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- Class Dropdown -->
+            <div class="mb-3">
+              <label>Class</label>
+              <select class="form-select" [(ngModel)]="tt.classId" name="classId" required>
+                <option disabled selected value="">Select Class</option>
+                <option *ngFor="let c of cls" [value]="c.id">{{ c.name }}</option>
+              </select>
+            </div>
+
+            <!-- Subject Dropdown -->
+            <div class="mb-3">
+              <label>Subject</label>
+              <select class="form-select" [(ngModel)]="tt.subjectId" name="subjectId" required>
+                <option disabled selected value="">Select Subject</option>
+                <option *ngFor="let s of sub" [value]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+
+            <!-- Teacher Dropdown -->
+            <div class="mb-3">
+              <label>Teacher</label>
+              <select class="form-select" [(ngModel)]="tt.teacherId" name="teacherId" required>
+                <option disabled selected value="">Select Teacher</option>
+                <option *ngFor="let t of teaches" [value]="t.id">{{ t.name }}</option>
+              </select>
+            </div>
+
+            <!-- Day of Week -->
+            <div class="mb-3">
+              <label>Day of Week</label>
+              <!-- <input type="text" class="form-control" [(ngModel)]="tt.dayOfWeek" name="dayOfWeek" required> -->
+              <select class="form-select" [(ngModel)]="tt.dayOfWeek" name="dayOfWeek"  required>
+              <option disabled selected value="">Select Day</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+
+            </select>
+            </div>
+
+            <!-- Time Slot Dropdown -->
+          <div class="mb-3">
+            <label>Time</label>
+            <select class="form-select" [(ngModel)]="tt.timeSlot" name="timeSlot" (change)="onTimeSlotChange()" required>
+              <option disabled selected value="">Select Time</option>
+              <option value="slot1">08:00 AM - 10:00 AM</option>
+              <option value="slot2">10:00 AM - 12:00 PM</option>
+              <option value="slot3">12:00 PM - 02:00 PM</option>
+            </select>
+          </div>
+
+
+            <!-- Start Time -->
+            <!-- <div class="mb-3">
+              <label>Start Time</label>
+              <input type="text" class="form-control" [(ngModel)]="tt.startTime" name="startTime" placeholder="e.g. 2:00 PM" required>
+            </div> -->
+
+            <!-- End Time -->
+            <!-- <div class="mb-3">
+              <label>End Time</label>
+              <input type="text" class="form-control" [(ngModel)]="tt.endTime" name="endTime" placeholder="e.g. 3:00 PM" required>
+            </div> -->
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancel</button>
+          <button *ngIf="!isEditMode" type="button" (click)="addTimetable()" class="btn btn-primary">Save</button>
+          <button *ngIf="isEditMode" type="button" (click)="updateTimetable()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-4">
+    <nav>
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1"><i class="bi bi-chevron-left"></i></a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link bg-primary border-0 rounded-circle text-white" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

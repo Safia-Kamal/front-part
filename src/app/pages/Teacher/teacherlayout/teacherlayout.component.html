@@ -1,0 +1,25 @@
+
+  <div class="teacher-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo">TEACHER</h2>
+      <ul class="menu">
+        <li class="active"><a routerLink="dashboard">Dashboard</a></li>
+        <a routerLink="teacherschedule"><li>Schedule</li></a>
+        <a routerLink="teachergrades"><li>Grades</li></a>
+        <a routerLink="teacherattendance"><li>Attendance</li></a>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main">
+      <nav class="navbar custom-navbar">
+        <span class="welcome">Welcome, Sir</span>
+        <img src="https://i.ibb.co/tmTQZ2W/avatar.png" alt="Profile" class="profile-img">
+      </nav>
+
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

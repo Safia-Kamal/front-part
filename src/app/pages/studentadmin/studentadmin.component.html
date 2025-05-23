@@ -1,0 +1,102 @@
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm rounded mb-4 px-3">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h5 text-primary">Manage Students</span>
+    <span class="text-muted">Administrator</span>
+  </div>
+</nav> 
+
+<div class="container bg-white rounded shadow-sm p-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">Students</h3>
+    <button class="btn btn-primary rounded-pill px-4 py-2" data-bs-toggle="modal" data-bs-target="#addStudentModal" (click)="openAddModal()">
+      Add Student
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-borderless align-middle">
+      <thead class="text-muted">
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>CLASS</th>
+          <th>NATIONAL ID</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.id }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.className }}</td>
+          <td>{{ student.parentNationalId }}</td>
+          <td>
+            <button class="btn btn-sm text-primary" title="View">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button class="btn btn-sm text-warning" title="Edit" (click)="openEditModal(student)">
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+            <button class="btn btn-sm text-danger" (click)="deleteStudent(student.id)" title="Delete">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-4">
+    <nav>
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1"><i class="bi bi-chevron-left"></i></a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link bg-primary border-0 rounded-circle text-white" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow-sm">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold text-primary" id="addStudentModalLabel">{{ isEditMode ? 'Edit Student' : 'Create a Student' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label>Full Name</label>
+            <input type="text" class="form-control" [(ngModel)]="std.name" name="name" placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <label>National Id</label>
+            <input type="text" class="form-control" [(ngModel)]="std.parentNationalId" name="parentNationalId" placeholder="National Id">
+          </div>
+          <div class="mb-3">
+            <label>Class</label>
+            <select class="form-select" [(ngModel)]="std.classId" name="classId">
+              <option disabled selected value="">Class</option>
+              <option *ngFor="let cl of classes" [value]="cl.id">{{ cl.name }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Cancel</button>
+        <button *ngIf="!isEditMode" type="button" (click)="addStudent()" class="btn btn-primary">Save Student</button>
+        <button *ngIf="isEditMode" type="button" (click)="updateStudent()" class="btn btn-primary">Update Student</button>
+      </div>
+    </div>
+  </div>
+</div>

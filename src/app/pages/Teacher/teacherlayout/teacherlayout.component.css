@@ -1,0 +1,105 @@
+*{
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+} 
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: aliceblue;
+} 
+
+/* Layout Container */
+.teacher-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+} 
+
+/* Sidebar */
+ .sidebar {
+  width: 220px;
+  background: #003f7f;
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.menu li:hover,
+.menu li.active {
+  color: #a3d4f7;
+} 
+
+/* Main Area */
+ .main {
+  flex: 1;
+  background: #f5faff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.navbar {
+  display: flex;
+  margin: 5px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+} 
+
+/* Custom Navbar */
+.custom-navbar {
+  background-color: #003f7f;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.custom-navbar .welcome {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.custom-navbar .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+} 
+
+/* Content */
+/* .content-wrapper {
+  padding: 30px;
+  flex: 1;
+}
+/* Reset & Base */
+
