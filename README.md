@@ -1,60 +1,63 @@
-# SchoolUi
+🎓 School Management System - Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+🚀 A modern, responsive web application for managing school-related operations, built using **Angular**.  
+Supports multiple user roles: **Admin**, **Teacher**, **Student**, and **Parent** with tailored dashboards and features.
+🔗 [View the API Repository](https://github.com/Safia-Kamal/SchoolManagementSystemAPIs.git)
 
-## Development server
+---
 
-To start a local development server, run:
+🔹 Overview
 
-```bash
+This is the frontend for the School Management System, built with Angular.  
+It interacts with a secure ASP.NET Core backend API to handle data operations such as class schedules, attendance, grades, authentication, and more.
+
+
+✅ Features
+
+- Authentication – Secure login system with JWT.
+- Teacher Dashboard – View schedule, mark attendance, manage grades.
+- Student Dashboard – View timetable, progress, and attendance.
+- Parent View – Monitor child’s grades and attendance.
+- Admin Panel – Manage users, classes, schedules, and subjects.
+- Timetable View – Dynamic class schedules per role.
+- Progress & Reports – Visualize student progress.
+- Role-based UI – Each role gets a custom interface.
+
+---
+
+💻 Technology Stack
+
+- Framework: Angular 19
+- Language: TypeScript
+- Styling: CSS / SCSS / Bootstrap
+- State Management: Built-in Services
+- Routing: Angular Router
+- API Integration: HttpClient with JWT Interceptors
+
+---
+
+🗂️ Project Structure
+/src
+/app
+/pages → Role-based components (Student, Teacher, Admin, etc.)
+/services → API services
+/guard → Auth guards for routes
+/constant → Shared constants
+/app.routes.ts → Routing setu
+
+Setup & Run Locally
+
+1️⃣ Clone the Repository:
+git clone https://github.com/Safia-Kamal/SchoolManagementSystemUI.git
+then open it using VS code
+
+2️⃣ Install dependencies:
+npm install
+3️⃣ Run the development server:
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Authentication Flow
+. User logs in via /login
+. JWT stored in localStorage
+. Interceptor attaches token to all API requests
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# front-part" 
